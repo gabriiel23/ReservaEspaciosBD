@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.post('/new_espacio', createEspacio);
+router.post('/newEspacio', createEspacio);
 router.get('/espacios', getEspacios);
 router.get('/espacio/:id', getEspacio);
-router.put('/update_espacio/:id', updateEspacio);
-router.delete('/delete_espacio/:id', deleteEspacio);
+router.put('/updateEspacio/:id', updateEspacio);
+router.delete('/deleteEspacio/:id', deleteEspacio);
 
 export default router;

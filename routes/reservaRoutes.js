@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.post('/new_reserva', createReserva);
+router.post('/newReserva', createReserva);
 router.get('/reservas', getReservas);
 router.get('/reserva/:id', getReserva);
-router.put('/update_reserva/:id', updateReserva);
-router.delete('/delete_reserva/:id', deleteReserva);
+router.put('/updateReserva/:id', updateReserva);
+router.delete('/deleteReserva/:id', deleteReserva);
 
 export default router;

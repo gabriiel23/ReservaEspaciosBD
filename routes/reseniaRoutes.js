@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.post('/new_resenia', createResenia);
+router.post('/newResenia', createResenia);
 router.get('/resenias', getResenias);
 router.get('/resenia/:id', getResenia);
-router.put('/update_resenia/:id', updateResenia);
-router.delete('/delete_resenia/:id', deleteResenia);
+router.put('/updateResenia/:id', updateResenia);
+router.delete('/deleteResenia/:id', deleteResenia);
 
 export default router;
