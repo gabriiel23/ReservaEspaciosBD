@@ -8,7 +8,12 @@ const db = getFirestore(firebase);
 export const createAutentificacion = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'autentificaciones'), data);
+    const autentificacion = {
+      correo: data.correo,
+      contraseña: data.contraseña,
+      id_usuario: doc(db, "usuario", data.id_usuario)
+    };
+    await addDoc(collection(db, 'autentificaciones'), autentificacion);
     res.status(200).send('Autentificacion created successfully');
   } catch (error) {
     res.status(400).send(error.message);

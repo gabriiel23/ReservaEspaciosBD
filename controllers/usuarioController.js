@@ -8,7 +8,16 @@ const db = getFirestore(firebase);
 export const createUsuario = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'usuarios'), data);
+    const usuario = {
+      nombres: data.nombres,
+      apellido: data.apellido,
+      correo_electronico: data.correo_electronico,
+      telefono: data.telefono,
+      idSede: doc(db, "sede", data.idSede),
+      idFacultad: doc(db, "facultad", data.idFacultad),
+      id_tipo_usuario: doc(db, "tipoUsuario", data.idCategoria)
+    };
+    await addDoc(collection(db, 'usuarios'), usuario);
     res.status(200).send('Usuario created successfully');
   } catch (error) {
     res.status(400).send(error.message);

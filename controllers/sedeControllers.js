@@ -17,7 +17,10 @@ const db = getFirestore(firebase);
 export const createSede = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'Sede'), data);
+    const sede = {
+      ciudad: data.ciudad
+    };
+    await addDoc(collection(db, 'Sede'), sede);
     res.status(200).send('Sede created successfully');
   } catch (error) {
     res.status(400).send(error.message);

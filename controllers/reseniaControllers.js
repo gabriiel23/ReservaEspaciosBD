@@ -17,7 +17,13 @@ const db = getFirestore(firebase);
 export const createResenia = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'Resenia'), data);
+    const resenia = {
+      comentario: data.comentario,
+      fecha_resenia: data.fecha_resenia,
+      Usuario_id_usuario: doc(db, "usuario", data.id_usuario),
+      id_espacio: doc(db, "espacio", data.id_espacio) 
+    };
+    await addDoc(collection(db, 'Resenia'), resenia);
     res.status(200).send('Resenia created successfully');
   } catch (error) {
     res.status(400).send(error.message);

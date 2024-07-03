@@ -18,7 +18,11 @@ const db = getFirestore(firebase);
 export const createCategory = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'categoria'), data);
+    const category = {
+      nombre: data.nombre,
+      Categoria_idCategoria: doc(db, "categoria", data.idCategoria)
+    };
+    await addDoc(collection(db, 'categoria'), category);
     res.status(200).send('Category created successfully');
   } catch (error) {
     res.status(400).send(error.message);

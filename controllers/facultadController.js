@@ -8,7 +8,12 @@ const db = getFirestore(firebase);
 export const createFacultad = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'facultades'), data);
+    const facultad = {
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      idSede: doc(db, "sede", data.idSede) 
+    };
+    await addDoc(collection(db, 'facultades'), facultad);
     res.status(200).send('Facultad created successfully');
   } catch (error) {
     res.status(400).send(error.message);

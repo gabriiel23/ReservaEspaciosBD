@@ -1,4 +1,5 @@
 import firebase from '../firebase.js';
+import categoria from '../models/categoriaModel.js';
 import Espacio from '../models/espacioModel.js';
 
 import {
@@ -17,7 +18,15 @@ const db = getFirestore(firebase);
 export const createEspacio = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'Espacio'), data);
+    const espacio = {
+      nombre_espacio: data.nombre_espacio,
+      capacidad: data.capacidad,
+      ubicacion: data.ubicacion,
+      descripción: data.descripción,
+      idSede: doc(db, "sede", data.idSede),
+      tipo_espacio: doc(db, "Sede", data.idCategoria)
+    };
+    await addDoc(collection(db, 'Espacio'), espacio);
     res.status(200).send('Espacio created successfully');
   } catch (error) {
     res.status(400).send(error.message);

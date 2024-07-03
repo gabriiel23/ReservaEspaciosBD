@@ -17,7 +17,16 @@ const db = getFirestore(firebase);
 export const createReserva = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'Reserva'), data);
+    const reserva = {
+      fecha_reserva: data.fecha_reserva,
+      hora_inicio: data.hora_inicio,
+      hora_fin: data.hora_fin,
+      estado_reserva: data.estado_reserva,
+      motivo_reserva: data.motivo_reserva,
+      id_usuario: doc(db, "usuario", data.id_usuario), 
+      id_espacio: doc(db, "espacio", data.id_espacio) 
+    };
+    await addDoc(collection(db, 'Reserva'), reserva);
     res.status(200).send('Reserva created successfully');
   } catch (error) {
     res.status(400).send(error.message);

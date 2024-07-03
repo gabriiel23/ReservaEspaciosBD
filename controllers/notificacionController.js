@@ -8,7 +8,15 @@ const db = getFirestore(firebase);
 export const createNotificacion = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'notificaciones'), data);
+    const notificacion = {
+      asunto: data.asunto,
+      cuerpo: data.cuerpo,
+      fecha_envio: data.fecha_envio,
+      id_usuario: doc(db, "usuario", data.id_usuario),
+      id_reserva: doc(db, "reserva", data.id_reserva),
+      id_espacio: doc(db, "espacio", data.id_espacio)
+    };
+    await addDoc(collection(db, 'notificaciones'), notificacion);
     res.status(200).send('Notificacion created successfully');
   } catch (error) {
     res.status(400).send(error.message);

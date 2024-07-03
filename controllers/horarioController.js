@@ -8,7 +8,13 @@ const db = getFirestore(firebase);
 export const createHorario = async (req, res, next) => {
   try {
     const data = req.body;
-    await addDoc(collection(db, 'horarios'), data);
+    const horario = {
+      dia_semana: data.dia_semana,
+      hora_apertura: data.hora_apertura,
+      hora_cierre: data.hora_cierre,
+      id_espacio: doc(db, "espacio", data.id_espacio)
+    };
+    await addDoc(collection(db, 'horarios'), horario);
     res.status(200).send('Horario created successfully');
   } catch (error) {
     res.status(400).send(error.message);
